@@ -1,0 +1,38 @@
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calculator {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 85px);
+  grid-template-rows: repeat(6, 85px);
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.number-display {
+  grid-column: 1 / span 4;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 40px;
+  font-weight: 700;
+}
