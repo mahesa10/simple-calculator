@@ -6,8 +6,8 @@ const clearBtn = document.querySelector("#btn-clear");
 
 
 let displayNumber = 0;
-let number1 = null;
-let number2 = null;
+let firstNumber = null;
+let secondNumber = null;
 let operator = "";
 let result = null;
 
@@ -66,14 +66,15 @@ const inputNumber = (num) => {
   if(operator === "") {
     if(displayNumber == 0) {
       displayNumber = num;
-    } else if(displayNumber === number1) {
+    } else if(displayNumber === firstNumber) {
       displayNumber = num;
     } else {
       displayNumber += num;
     }
   } else {
-    if(displayNumber === number1) {
+    if(displayNumber === firstNumber) {
       displayNumber = num;
+      // console.log(num);
     } else {
       displayNumber += num;
     }
@@ -81,22 +82,31 @@ const inputNumber = (num) => {
 }
 
 const inputOperation = (opVal) => {
-  number1 = displayNumber;
-  operator = opVal;
+  if(firstNumber !== null) {
+    secondNumber = displayNumber;
+    operate(operator, firstNumber, secondNumber);
+    updateDisplay();
+    firstNumber = result;
+    operator = opVal
+    result = null;
+  } else {
+    firstNumber = displayNumber;
+    operator = opVal;
+  }
 }
 
 const inputEquals = () => {
-  number2 = displayNumber;
-  operate(operator, number1, number2);
-  number2 = null;
-  number1 = result;
+  secondNumber = displayNumber;
+  operate(operator, firstNumber, secondNumber);
+  secondNumber = null;
+  firstNumber = result;
   operator = "";
 }
 
 const clear = () => {
   displayNumber = 0;
-  number1 = null;
-  number2 = null;
+  firstNumber = null;
+  secondNumber = null;
   operator = "";
   result = null;
 }
@@ -117,6 +127,7 @@ operationBtn.forEach(btn => {
 equalBtn.addEventListener("click", () => {
   inputEquals();
   updateDisplay();
+  result = null;
 });
 
 clearBtn.addEventListener("click", () => {
