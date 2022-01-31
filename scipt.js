@@ -7,7 +7,7 @@ const clearBtn = document.querySelector("#btn-clear");
 const backspaceBtn = document.querySelector("#btn-backspace");
 const decimalBtn = document.querySelector('#btn-decimal');
 
-let displayNumber = 0;
+let displayNumber = "0";
 let firstNumber = null;
 let secondNumber = null;
 let operator = "";
@@ -69,13 +69,13 @@ const inputNumber = (num) => {
   if(operator === "") {
     if(displayNumber == 0) {
       displayNumber = num;
-    } else if(displayNumber === firstNumber) {
+    } else if(displayNumber == firstNumber) {
       displayNumber = num;
     } else {
       displayNumber += num;
     }
   } else {
-    if(displayNumber === firstNumber) {
+    if(displayNumber == firstNumber) {
       displayNumber = num;
     } else {
       displayNumber += num;
@@ -88,7 +88,7 @@ const inputOperation = (opVal) => {
     secondNumber = displayNumber;
     operate(operator, firstNumber, secondNumber);
     updateDisplay();
-    firstNumber = result;
+    firstNumber = displayNumber;
     operator = opVal
     result = null;
   } else {
@@ -122,7 +122,7 @@ const checkDecimal = () => {
 }
 
 const clear = () => {
-  displayNumber = 0;
+  displayNumber = "0";
   firstNumber = null;
   secondNumber = null;
   operator = "";
