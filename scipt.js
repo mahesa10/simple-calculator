@@ -4,7 +4,8 @@ const operationBtn = document.querySelectorAll(".btn-operation");
 const minusPlusBtn = document.querySelector("#btn-minus-plus")
 const equalBtn = document.querySelector("#btn-equals");
 const clearBtn = document.querySelector("#btn-clear");
-const backspaceBtn = document.querySelector("#btn-backspace")
+const backspaceBtn = document.querySelector("#btn-backspace");
+const decimalBtn = document.querySelector('#btn-decimal');
 
 let displayNumber = 0;
 let firstNumber = null;
@@ -13,20 +14,20 @@ let operator = "";
 let result = null;
 
 const add = (num1, num2) => {
-  let x = parseInt(num1)
-  let y = parseInt(num2)
+  let x = parseFloat(num1)
+  let y = parseFloat(num2)
   return x + y;
 };
 
 const substract = (num1, num2) => {
-  let x = parseInt(num1)
-  let y = parseInt(num2)
+  let x = parseFloat(num1)
+  let y = parseFloat(num2)
   return x - y;
 };
 
 const divide = (num1, num2) => {
-  let x = parseInt(num1)
-  let y = parseInt(num2)
+  let x = parseFloat(num1)
+  let y = parseFloat(num2)
   if (y === 0) {
     return "error"
   }
@@ -34,8 +35,8 @@ const divide = (num1, num2) => {
 };
 
 const multiply = (num1, num2) => {
-  let x = parseInt(num1)
-  let y = parseInt(num2)
+  let x = parseFloat(num1)
+  let y = parseFloat(num2)
   return x * y;
 };
 
@@ -58,9 +59,10 @@ const operate = (operator, num1, num2) => {
 
 const updateDisplay = () => {
   if (result !== null) {
-    displayNumber = result; 
+    displayNumber = roundNum(result, 15).toString(); 
   }
   numberDisplay.innerText = displayNumber;
+  checkDecimal();
 }
 
 const inputNumber = (num) => {
@@ -107,6 +109,18 @@ const inputMinusPlus = () => {
   displayNumber *= -1;
 }
 
+const inputDecimal = (dec) => {
+  displayNumber += dec;
+}
+
+const checkDecimal = () => {
+  if (displayNumber.includes(".")) {
+    decimalBtn.disabled = true;
+  } else {
+    decimalBtn.disabled = false;
+  }
+}
+
 const clear = () => {
   displayNumber = 0;
   firstNumber = null;
@@ -117,6 +131,10 @@ const clear = () => {
 
 const backspace = () => {
   displayNumber = displayNumber.substr(0, displayNumber.length - 1);
+}
+
+const roundNum = (num, places) => {
+  return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
 }
 
 numBtn.forEach(btn => {
@@ -134,6 +152,11 @@ operationBtn.forEach(btn => {
 
 minusPlusBtn.addEventListener("click", () => {
   inputMinusPlus();
+  updateDisplay();
+})
+
+decimalBtn.addEventListener("click", () => {
+  inputDecimal(decimalBtn.value);
   updateDisplay();
 })
 
