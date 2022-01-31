@@ -1,9 +1,10 @@
 const numberDisplay = document.querySelector(".number-display");
 const numBtn = document.querySelectorAll(".btn-numbers");
 const operationBtn = document.querySelectorAll(".btn-operation");
+const minusPlusBtn = document.querySelector("#btn-minus-plus")
 const equalBtn = document.querySelector("#btn-equals");
 const clearBtn = document.querySelector("#btn-clear");
-
+const backspaceBtn = document.querySelector("#btn-backspace")
 
 let displayNumber = 0;
 let firstNumber = null;
@@ -74,7 +75,6 @@ const inputNumber = (num) => {
   } else {
     if(displayNumber === firstNumber) {
       displayNumber = num;
-      // console.log(num);
     } else {
       displayNumber += num;
     }
@@ -103,12 +103,20 @@ const inputEquals = () => {
   operator = "";
 }
 
+const inputMinusPlus = () => {
+  displayNumber *= -1;
+}
+
 const clear = () => {
   displayNumber = 0;
   firstNumber = null;
   secondNumber = null;
   operator = "";
   result = null;
+}
+
+const backspace = () => {
+  displayNumber = displayNumber.substr(0, displayNumber.length - 1);
 }
 
 numBtn.forEach(btn => {
@@ -124,6 +132,11 @@ operationBtn.forEach(btn => {
   })
 });
 
+minusPlusBtn.addEventListener("click", () => {
+  inputMinusPlus();
+  updateDisplay();
+})
+
 equalBtn.addEventListener("click", () => {
   inputEquals();
   updateDisplay();
@@ -132,5 +145,10 @@ equalBtn.addEventListener("click", () => {
 
 clearBtn.addEventListener("click", () => {
   clear();
+  updateDisplay();
+});
+
+backspaceBtn.addEventListener("click", () => {
+  backspace();
   updateDisplay();
 })
