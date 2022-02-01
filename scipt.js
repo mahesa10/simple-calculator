@@ -130,7 +130,11 @@ const clear = () => {
 }
 
 const backspace = () => {
-  displayNumber = displayNumber.substr(0, displayNumber.length - 1);
+  if (displayNumber.length === 1) {
+    displayNumber = "0";
+  } else {
+    displayNumber = displayNumber.slice(0, displayNumber.length - 1);
+  }
 }
 
 const roundNum = (num, places) => {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap');
 
 html {
   -webkit-box-sizing: border-box;
@@ -13,22 +13,25 @@ html {
 }
 
 body {
-  background-color: gray;
+  background-color: hsl(45, 14%, 89%);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .calculator {
-  background-color: white;
+  background-color: hsl(209, 100%, 20%);
   display: grid;
-  grid-template-columns: repeat(4, 85px);
-  grid-template-rows: repeat(6, minmax(85px, auto));
+  grid-template-columns: repeat(4, 70px);
+  grid-template-rows: repeat(6, minmax(70px, auto));
   gap: 8px;
   padding: 8px;
   border-radius: 8px;
+  border: 8px solid hsl(216, 100%, 4%);
+  margin-top: 50px;
 }
 
 .number-display {
@@ -39,13 +42,70 @@ body {
   font-size: 40px;
   font-weight: 500;
   height: 100px;
+  background-color: hsl(216, 100%, 4%);
+  color: white;
+  padding: 4px 10px;
 }
 
 button {
-  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
   font-family: inherit;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: hsl(216, 100%, 12%);
+  color: white;
+}
+
+button:hover {
+  background-color: hsl(216, 100%, 7%);
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+.btn-operation, #btn-equals {
+  background-color: hsl(127, 8%, 38%);
+}
+
+.btn-operation:hover, #btn-equals:hover {
+  background-color: hsl(127, 8%, 32%);
+}
+
+#btn-clear, #btn-backspace {
+  background-color: hsl(360, 85%, 63%);
+}
+
+#btn-clear:hover, #btn-backspace:hover {
+  background-color: hsl(360, 85%, 55%);
+}
+#btn-backspace > img {
+  width: 40px;
 }
 
 #btn-zero {
   grid-column: 1 / span 2;;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 80px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer a {
+  color: black;
+}
+
+.copyright {
+  font-size: 32px;
+  margin-top: -5px;
 }
